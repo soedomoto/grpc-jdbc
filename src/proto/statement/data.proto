@@ -1,0 +1,62 @@
+syntax = "proto3"; 
+
+import "connection/data.proto";
+
+package org.soedomoto.jdbc.grpc.statement;
+
+message Statement {
+    org.soedomoto.jdbc.grpc.connection.Connection connection = 1;
+    string id = 2;
+}
+
+message PreparedStatement {
+    org.soedomoto.jdbc.grpc.connection.Connection connection = 1;
+    string id = 2;
+}
+
+message ResultSet {
+    string id = 1;
+}
+
+message ExecuteUpdateResult {
+    int32 updated_rows = 1;
+}
+
+message Metadata {
+    int32 column_count = 1;
+    repeated ColumnMetadata column_metadatas = 2;
+}
+
+message ColumnMetadata {
+    int32 index = 1;
+    string name = 2;
+    string type_name = 3;
+    int32 type = 4;
+    string class_name = 5;
+    int32 display_size = 6;
+    string label = 7;
+}
+
+message Record {
+    repeated Column columns = 1;
+}
+
+message Column {
+    int32 index = 1;
+    string name = 14;
+    oneof value {
+        bool bool_value = 2;
+        int32 int_value = 3;
+        bytes byte_value = 4;
+        int64 long_value = 5;
+        bytes bytes_value = 6;
+        double bigdecimal_value = 7;
+        int32 short_value = 8;
+        double double_value = 9;
+        float float_value = 10;
+        string date_value = 11;
+        string time_value = 12;
+        string timestamp_value = 13;
+        string string_value = 100;
+    }
+}

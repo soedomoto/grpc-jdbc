@@ -1,0 +1,99 @@
+syntax = "proto3"; 
+
+import "connection/data.proto";
+
+package org.soedomoto.jdbc.grpc.database_metadata;
+
+message SupportsConvertRequest {
+    int32 from_type = 1;
+    int32 to_type = 2;
+}
+
+message supportsTransactionIsolationLevelRequest {
+    int32 level = 1;
+}
+
+message GetMetadataRequest {
+    org.soedomoto.jdbc.grpc.connection.Connection connection = 1;
+}
+
+message GetProceduresRequest {
+    GetMetadataRequest parent = 1;
+    string catalog = 2;
+    string schema_pattern = 3;
+    string procedure_name_pattern = 4;
+}
+
+message GetProcedureColumnsRequest {
+    GetMetadataRequest parent = 1;
+    string catalog = 2;
+    string schema_pattern = 3;
+    string procedure_name_pattern = 4;
+    string column_name_pattern = 5;
+}
+
+message GetTablesRequest {
+    string catalog = 1;
+    string schema_pattern = 2;
+    string table_name_pattern = 3;
+    repeated string types = 4;
+    org.soedomoto.jdbc.grpc.connection.Connection connection = 5;
+}
+
+message GetColumnsRequest {
+    GetMetadataRequest parent = 1;
+    string catalog = 2;
+    string schema_pattern = 3;
+    string table_name_pattern = 4;
+    string column_name_pattern = 5;
+}
+
+message GetColumnPrivilegesRequest {
+    GetMetadataRequest parent = 1;
+    string catalog = 2;
+    string schema = 3;
+    string table = 4;
+    string column_name_pattern = 5;
+}
+
+message GetTablePrivilegesRequest {
+    GetMetadataRequest parent = 1;
+    string catalog = 2;
+    string schema_pattern = 3;
+    string table_name_pattern = 4;
+}
+
+message GetBestRowIdentifierRequest {
+    GetMetadataRequest parent = 1;
+    string catalog = 2;
+    string schema = 3;
+    string table = 4;
+    int32 scope = 5;
+    bool nullable = 6;
+}
+
+message GetMetadataColumnsRequest {
+    GetMetadataRequest parent = 1;
+    string catalog = 2;
+    string schema = 3;
+    string table = 4;
+}
+
+message GetCrossReferenceRequest {
+    GetMetadataRequest parent = 1;
+    string parentCatalog = 2;
+    string parentSchema = 3;
+    string parentTable = 4;
+    string foreignCatalog = 5;
+    string foreignSchema = 6;
+    string foreignTable = 7;
+}
+
+message GetIndexInfoRequest {
+    GetMetadataRequest parent = 1;
+    string catalog = 2;
+    string schema = 3;
+    string table = 4;
+    bool unique = 5;
+    bool approximate = 6;
+}

@@ -1,0 +1,32 @@
+syntax = "proto3"; 
+
+import "connection/data.proto";
+import "statement/data.proto";
+
+package org.soedomoto.jdbc.grpc.statement;
+
+message CreateStatementRequest {
+    org.soedomoto.jdbc.grpc.connection.Connection connection = 1;
+}
+
+message PrepareStatementRequest {
+    org.soedomoto.jdbc.grpc.connection.Connection connection = 1;
+    string sql = 2;
+}
+
+message ExecuteQueryRequest {
+    oneof type {
+        Statement statement = 1;
+        PreparedStatement prepared_statement = 2;
+    }
+    string sql = 3;
+    repeated Column params = 4;
+}
+
+message ResultSetMetaDataRequest {
+    ResultSet result_set = 1;
+}
+
+message ResultSetDataRequest {
+    ResultSet result_set = 1;
+}

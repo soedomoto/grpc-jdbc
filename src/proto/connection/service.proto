@@ -1,0 +1,10 @@
+syntax = "proto3"; 
+
+import "connection/service_messages.proto";
+import "connection/data.proto";
+
+package org.soedomoto.jdbc.grpc.connection;
+
+service ConnectionService {
+    rpc Connect (ConnectRequest) returns (Connection);
+}

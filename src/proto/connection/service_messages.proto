@@ -1,0 +1,12 @@
+syntax = "proto3"; 
+
+package org.soedomoto.jdbc.grpc.connection;
+
+message ConnectRequest {
+    string connection_name = 1;
+    string jdbc_url = 2;
+    string driver_url = 3;
+    string driver_class = 4;
+    string driver_username = 5;
+    string driver_password = 6;
+}

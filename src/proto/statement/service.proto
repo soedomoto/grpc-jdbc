@@ -1,0 +1,15 @@
+syntax = "proto3"; 
+
+import "statement/service_messages.proto";
+import "statement/data.proto";
+
+package org.soedomoto.jdbc.grpc.statement;
+
+service StatementService {
+    rpc CreateStatement (CreateStatementRequest) returns (Statement);
+    rpc PrepareStatement (PrepareStatementRequest) returns (PreparedStatement);
+    rpc ExecuteQuery (ExecuteQueryRequest) returns (ResultSet);
+    rpc ExecuteUpdate (ExecuteQueryRequest) returns (ExecuteUpdateResult);
+    rpc ResultSetMetaData (ResultSetMetaDataRequest) returns (Metadata);
+    rpc ResultSetData (ResultSetDataRequest) returns (stream Record);
+}
